@@ -31,6 +31,18 @@ app.use("/api/users", userRoute)
 app.use("/api/hotels", hotelRoute)
 app.use("/api/rooms", roomRoute)
 
+app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500;
+    const errorMessage = err.message || "something went Wrong";
+    return res.status(errorStatus).json({
+        success: false,
+        status: errorStatus,
+        message: errorMessage,
+        stack: err.stack,
+    })
+
+})
+
 app.listen(8000, () =>{
     connect()
     console.log("connected to backend !!!!!....")
