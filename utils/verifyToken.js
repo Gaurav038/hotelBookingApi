@@ -15,3 +15,25 @@ export const verifyToken = (req, res, next) => {
         next()
     })
 }
+
+export const verifyUser = (req, res, next) => {
+    verifyToken(req, res, next,() => {
+        if(req.currUser.id === req.params.id || req.currUser.isAdmin){
+            next()
+        }
+        else{
+            return next(createError(403, "you are not authorized User!!"))
+        }
+    })
+}
+
+export const verifyAdmin = (req, res, next) => {
+    verifyToken(req, res ,next , () => {
+        if(req.currUser.isAdmin){
+            next()
+        }
+        else{
+            return next(createError(403, "you are not Admin!!"))
+        }
+    })
+}
