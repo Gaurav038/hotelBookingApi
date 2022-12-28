@@ -16,7 +16,7 @@ router.delete("/:id",verifyAdmin, deleteHotel)
 router.get("/find/:id", getHotel)
 
 // get All
-router.get("/find/", getAllHotel)
+router.get("/", getAllHotel)
 
 router.get("/countByCity", countByCity)
 router.get("/countByType", countByType)
