@@ -33,14 +33,15 @@ const HotelSchema = new Schema({
         type: String,
         required: true,
       },
-      rating: {
+      maxPeople: {
         type: Number,
-        min: 0,
-        max: 5,
+        required: true
       },
-      rooms: {
-        type: [String],
+      rooms_unavailableDates: {
+        type: [Date]
       },
+      currentbookings: []
+      ,
       cheapestPrice: {
         type: Number,
         required: true,

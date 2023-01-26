@@ -9,8 +9,7 @@ export const register = async (req, res, next) => {
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)
         const newUser = new Users({
-            username: req.body.username,
-            email: req.body.email,
+            ...req.body,
             password: hash
         })
 
@@ -38,7 +37,7 @@ export const login = async (req, res, next) => {
            .cookie("access_token", token, {
             httpOnly: true
            })
-           .status(200).send({...otherDetails})
+           .status(200).send({details: {...otherDetails}, isAdmin})
 
     } catch (error) {
         next(error)

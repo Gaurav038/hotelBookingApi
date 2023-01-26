@@ -101,3 +101,19 @@ export const getHotelRooms = async(req, res, next) => {
         next(error)
     }
 }
+
+export const updateHotelAvailability = async (req, res, next) => {
+    try {
+      await Hotel.updateOne(
+        { "_id": req.params.id },
+        {
+          $push: {
+            "rooms_unavailableDates": req.body.dates
+          },
+        }
+      );
+      res.status(200).json("Room status has been updated.");
+    } catch (err) {
+      next(err);
+    }
+  };
