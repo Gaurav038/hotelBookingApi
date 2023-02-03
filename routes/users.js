@@ -1,5 +1,5 @@
 import express from "express";
-import {getUser, getUsers, updateUser } from "../controllers/user.js";
+import {getUser, getUsers, totalUser, updateUser } from "../controllers/user.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 const router = express.Router()
 
@@ -20,6 +20,8 @@ router.put("/:id",verifyUser, updateUser)
 router.get("/", verifyAdmin, getUsers)
 
 // ----get single---
+router.get("/count", totalUser)
+
 router.get("/:id",verifyUser, getUser)
 
 

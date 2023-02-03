@@ -85,6 +85,15 @@ export const getBookingByUserId = async(req, res, next) => {
     }
 }
 
+export const totalBooking= async(req, res, next) => {
+    try {
+      const bookingCount = await Booking.countDocuments();
+      res.status(200).json(bookingCount)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const cancelBooking = async(req, res, next) => {
     const {bookingid, roomid, dateslist} = req.body
 

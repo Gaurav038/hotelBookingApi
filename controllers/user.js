@@ -13,6 +13,15 @@ export const updateUser = async (req,res,next)=>{
   }
 }
 
+export const totalUser = async(req, res, next) => {
+  try {
+    const userCount = await User.countDocuments();
+    res.status(200).json(userCount)
+  } catch (error) {
+      next(error)
+  }
+}
+
 export const getUser = async (req,res,next)=>{
   try {
     const user = await User.findById(req.params.id);
