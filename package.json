@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "build": "yarn install && yarn run build"
+    "build": "babel src -d lib && yarn install && yarn run build"
   },
   "keywords": [],
   "author": "",
