@@ -7,6 +7,7 @@ import userRoute from "./routes/users.js"
 import bookingRoute from "./routes/booking.js"
 import cookieParser from "cookie-parser"
 import cors from "cors";
+const PORT = process.env.PORT || 8000
 
 const app = express()
 dotenv.config()
@@ -47,7 +48,7 @@ app.use((err, req, res, next) => {
 
 })
 
-app.listen(8000, () =>{
+app.listen(PORT, () =>{
     connect()
-    console.log("connected to backend !!!!!....")
+    console.log("connected to backend yess !!!!!....", PORT)
 })
