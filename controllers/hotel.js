@@ -23,7 +23,7 @@ export const getHotel = async(req, res, next) => {
 }
 
 export const getAllHotel = async(req, res, next) => {
- const {min, max, limit, people, ...others} = req.query
+ const {min, max, people, ...others} = req.query
         try {
             var Hotels;
             if(others.city){
@@ -31,7 +31,7 @@ export const getAllHotel = async(req, res, next) => {
                         city: {$regex: new RegExp('^'+ others.city, "i") },
                         cheapestPrice: {$gte: min || 1, $lte: max || 12000},
                         maxPeople : {$gte: people}
-                }).limit(limit);
+                });
             }
             else if(others.type){
                 Hotels = await Hotel.find({type: others.type});
@@ -51,6 +51,15 @@ export const getAllHotel = async(req, res, next) => {
             next(error)
         }
     
+}
+
+export const getFavHotel = async(req, res, next) => {
+    try {
+        const hotels = await Hotel.find({featured:true})
+        res.status(200).json(hotels)
+    } catch (error) {
+        next(error)
+    }
 }
 
 export const countByCity = async(req, res, next) => {
