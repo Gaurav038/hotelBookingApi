@@ -15,14 +15,14 @@ const router = express.Router()
 //   res.send("hello admin, you are logged in and you can delete all accounts")
 // })
 
-router.put("/:id",verifyUser, updateUser)
+router.put("/:id", updateUser)
 // ---- get All ----
 router.get("/", verifyAdmin, getUsers)
 
 // ----get single---
 router.get("/count", totalUser)
 
-router.get("/:id",verifyUser, getUser)
+router.get("/:id", getUser)
 
 
 

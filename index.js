@@ -7,6 +7,8 @@ import userRoute from "./routes/users.js"
 import bookingRoute from "./routes/booking.js"
 import cookieParser from "cookie-parser"
 import cors from "cors";
+import bodyParser from 'body-parser'
+
 const PORT = process.env.PORT || 8000
 
 const app = express()
@@ -27,9 +29,14 @@ mongoose.connection.on("disconnected", () => {
 })
 
 // middleware
-app.use(cors())
-app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(cors({
+    credentials: true,
+    origin: true,
+    optionsSuccessStatus: 200,
+  }))
+app.use(express.json())
 
 app.use("/api/auth", authRoute)
 app.use("/api/users", userRoute)
