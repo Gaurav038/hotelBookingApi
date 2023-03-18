@@ -10,7 +10,7 @@ router.post("/",verifyAdmin, createHotel);
 router.get("/find/:id", getHotel)
 
 // get All
-router.get("/", verifyAdmin, getAllHotel)
+router.get("/", getAllHotel)
 
 router.get("/count", totalHotel)
 

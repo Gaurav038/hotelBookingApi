@@ -33,16 +33,14 @@ export const login = async (req, res, next) => {
         const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, process.env.JWT_SECRET_KEY)
 
         const {password, isAdmin, ...otherDetails} = user._doc
-        console.log(token);
         res.cookie('jwttoken', token,
             {
                 secure: process.env.NODE_ENV === 'localhost' ? 'auto' : true,
                 httpOnly: true,
-                maxAge: 1000 * 60 * 60 * 24 * 7,
+                maxAge: 7*24*60*60*1000,   //days*hoursPerDay*minutesPerHour*secondsPerMinute*1000
                 sameSite: process.env.NODE_ENV === 'localhost' ? 'lax' : 'none',
             
-            }
-            )
+            })
            .status(200).send({details: {...otherDetails, isAdmin}, isAdmin})
 
     } catch (error) {
